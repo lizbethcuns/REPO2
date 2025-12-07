@@ -34,14 +34,34 @@ source ~/.bashrc
 ros2 pkg list | grep turtlebot4
 
 # ---------------------------------->Lanzar los mundos<---------------------------------------
-# Abre 3 terminales
-#
-#
-#
-#
-#
-#
-#
+# Abre 2 terminales
+# Terminal 1
+# Siempre asegúrate de tener esto (evita el freeze la primera vez)
+export IGN_IP=127.0.0.1
+
+# 1. Mundo WAREHOUSE con modelo ESTÁNDAR → 2 puntos
+ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=warehouse
+
+# Deja la simulación en PLAY (▶️) y mueve la cámara para que se vea bien el robot.    PARA ROTAR SHIFT DERECHA MANTENER PRESIONADO + CON CLIC DERECHA MANTENER PRESIONADO
+
+# Ver el robot en RViz:
+ros2 launch turtlebot4_viz view_robot.launch.py
+
+# Ver el modelo del robot:
+ros2 launch turtlebot4_viz view_model.launch.py
+
+# Visualización del Grafo de Nodos con 
+rqt_graph
+
+# Visualizar el LiDAR
+Haz clic en los tres puntitos ⋯ (arriba a la derecha)
+Selecciona “Visualize Lidar”
+Dale a “Refresh”
+Elige el sensor rplidar
+→ Deberías ver el láser rojo/azul escaneando el entorno.
+
+# Si el robot se vuelve loco o se para (modo seguro), simplemente cierra todo y vuelve a lanzar el mundo con este comando (solución al problema de tus amigos):
+ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=warehouse lidar:=cpu 
 #
 #
 #
