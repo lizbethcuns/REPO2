@@ -34,6 +34,11 @@ source ~/.bashrc
 ros2 pkg list | grep turtlebot4
 
 # ---------------------------------->Lanzar los mundos<---------------------------------------
+# es común encontrarse con un error relacionado con la solicitud de mundos: "Requesting list of worlds"
+# Fix para el hang en "Requesting list of worlds" (desactiva descargas online automáticas)
+export IGN_GAZEBO_OFFLINE=1
+export GZ_SIM_RESOURCE_PATH=~/.gz/fuel/fuel.ignitionrobotics.org/openrobotics/models  # Usa recursos locales si ya los descargaste
+
 # Abre 2 terminales
 # Terminal 1
 # Siempre asegúrate de tener esto (evita el freeze la primera vez)
@@ -54,15 +59,38 @@ ros2 launch turtlebot4_viz view_model.launch.py
 rqt_graph
 
 # Visualizar el LiDAR
-Haz clic en los tres puntitos ⋯ (arriba a la derecha)
-Selecciona “Visualize Lidar”
-Dale a “Refresh”
-Elige el sensor rplidar
-→ Deberías ver el láser rojo/azul escaneando el entorno.
+#Haz clic en los tres puntitos ⋯ (arriba a la derecha)
+#Selecciona “Visualize Lidar”
+#Dale a “Refresh”
+#Elige el sensor rplidar
+#--------------------> Deberías ver el láser rojo/azul escaneando el entorno.
 
 # Si el robot se vuelve loco o se para (modo seguro), simplemente cierra todo y vuelve a lanzar el mundo con este comando (solución al problema de tus amigos):
 ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=warehouse lidar:=cpu 
-#
+
+# --------------->ADICIONALES<---------------------------
+#Formas de girar/mover la cámara en Gazebo (elige la que más te guste):
+
+#Con el mouse (la más rápida y cómoda)
+#Clic izquierdo + arrastrar → giras la cámara (mira a los lados, arriba, abajo).
+#Rueda del mouse → acercas/alejas (zoom).
+#Clic derecho + arrastrar → mueves la cámara de lado (pan).
+#Rueda presionada + arrastrar → órbita rápida alrededor del robot.
+
+#Con el teclado + mouse
+#Mantén presionada la tecla Shift y arrastra con clic izquierdo → giras más rápido.
+
+#Modo “Orbit” (el mejor para grabar)
+#En la barra superior de herramientas (donde están los iconos de mano, lupa, etc.) haz clic en el icono que parece una flecha circular ↺ (es el 4º o 5º icono).
+#Ahora solo con mover el mouse (sin clic) la cámara orbita alrededor del robot automáticamente. Perfecto para tu video.
+
+#Vista frontal directa del robot (si quieres que quede bonito en el video)
+#Haz doble clic sobre el robot en la lista de la izquierda (donde dice “turtlebot4_standard” o similar).
+#O selecciona el robot en la lista → clic derecho → “View → Follow” o “View → Orbit”.
+
+
+#Prueba ahora mismo el clic izquierdo + arrastrar y verás que puedes girar 360° y ponerte justo enfrente del robot sin problema.
+# --------------------------------> finaliza <-------------------------
 #
 #
 #
