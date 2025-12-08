@@ -33,6 +33,25 @@ source ~/.bashrc
 
 ros2 pkg list | grep turtlebot4
 
+# ------------------------------------------------> PASOS PARA CORREGUIR EL WORKSPACE <-----------------------------------------------
+#no me aparecia el turtlebot4_description 
+# Ir a la carpeta del Workspace 
+cd ~/turtlebot4_ws/src
+# Clonar el repositorio que falta 
+git clone https://github.com/turtlebot/turtlebot4.git -b humble
+# Instalar dependencias
+cd ~/turtlebot4_ws
+rosdep install --from-paths src --ignore-src -r -y
+# Compilar
+colcon build --symlink-install
+source install/setup.bash
+# para evitar problemas despues de compilar 
+source ~/turtlebot4_ws/install/setup.bash
+# verificar que existe el paquete 
+ros2 pkg list | grep turtlebot4
+
+~/turtlebot4_ws/src/turtlebot4/turtlebot4_description/urdf/sensors/rplidar.urdf.xacro
+
 # ---------------------------------->Lanzar los mundos<---------------------------------------
 # es común encontrarse con un error relacionado con la solicitud de mundos: "Requesting list of worlds"
 # Fix para el hang en "Requesting list of worlds" (desactiva descargas online automáticas)
@@ -49,9 +68,11 @@ ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=war
 
 # Deja la simulación en PLAY (▶️) y mueve la cámara para que se vea bien el robot.    PARA ROTAR SHIFT DERECHA MANTENER PRESIONADO + CON CLIC DERECHA MANTENER PRESIONADO
 
+# ------------------------------------------------>ADICIONAL <-----------------------------------------------
 # Primero lanzar SLAM 
 ros2 launch turtlebot4_navigation slam.launch.py
-
+# ------------------------------------------------>ADICIONAL <-----------------------------------------------
+# COntrolar desde Terminal
 # Ver el robot en RViz:
 ros2 launch turtlebot4_viz view_robot.launch.py
 
