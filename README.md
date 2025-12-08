@@ -31,8 +31,6 @@ source ~/turtlebot4_ws/install/setup.bash
 echo 'source ~/turtlebot4_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
 
-ros2 pkg list | grep turtlebot4
-
 # ------------------------------------------------> PASOS PARA CORREGUIR EL WORKSPACE <-----------------------------------------------
 #no me aparecia el turtlebot4_description 
 # Ir a la carpeta del Workspace 
@@ -50,6 +48,7 @@ source ~/turtlebot4_ws/install/setup.bash
 # verificar que existe el paquete 
 ros2 pkg list | grep turtlebot4
 
+# ------------------------------------------------> UBICACION DEL ARCHIVO PARA CAMBIAR EL RANGO  <-----------------------
 ~/turtlebot4_ws/src/turtlebot4/turtlebot4_description/urdf/sensors/rplidar.urdf.xacro
 
 # ---------------------------------->Lanzar los mundos<---------------------------------------
@@ -58,15 +57,18 @@ ros2 pkg list | grep turtlebot4
 export IGN_GAZEBO_OFFLINE=1
 export GZ_SIM_RESOURCE_PATH=~/.gz/fuel/fuel.ignitionrobotics.org/openrobotics/models  # Usa recursos locales si ya los descargaste
 
-# Abre 2 terminales
+# ---------------------------------> Abre 2 terminales <---------------------------------------
 # Terminal 1
 # Siempre asegúrate de tener esto (evita el freeze la primera vez)
 export IGN_IP=127.0.0.1
 
-# 1. Mundo WAREHOUSE con modelo ESTÁNDAR → 2 puntos
+# 1. Mundo WAREHOUSE con modelo ESTÁNDAR
 ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=warehouse
 
 # Deja la simulación en PLAY (▶️) y mueve la cámara para que se vea bien el robot.    PARA ROTAR SHIFT DERECHA MANTENER PRESIONADO + CON CLIC DERECHA MANTENER PRESIONADO
+
+# ---------> control del TurtleBot 4 DESDE LA TERMINAL <--------------------------------------------------
+
 
 # ------------------------------------------------>ADICIONAL <-----------------------------------------------
 # Primero lanzar SLAM 
