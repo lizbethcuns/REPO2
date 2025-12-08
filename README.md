@@ -1,3 +1,30 @@
+Aclaracion importante 
+Instalación desde fuente (compilando código): Esto es más avanzado, si clonaste repos de GitHub (como ros2/ros_core) y usaste colcon build en un workspace (una carpeta como ~/ros2_ws). En este caso, usa el source del workspace:
+source ~/tu_workspace/install/setup.bash  # Reemplaza "tu_workspace" por el nombre real, ej: ~/ros2_humble_ws
+
+Ejecuta el source (elige uno según tu instalación):text
+source /opt/ros/humble/setup.bash  # Si instalaste con apt                este noooooooooooooooo
+oo tambiennn
+source ~/turtlebot4_ws/install/setup.bash
+
+Luego, lanza la simulación (todo en una línea):
+ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py model:=standard world:=warehouse
+Abre una terminal nueva para control:
+Abre otra terminal (Ctrl+Alt+T o desde menú).
+Nuevamente, ejecuta el source (mismo que en el paso 1):
+source ~/turtlebot4_ws/install/setup.bash
+Ahora sí, lista los tópicos (todo en una línea):text
+ros2 topic list
+Deberías ver /cmd_vel y otros como en el ejemplo del repo.
+Envía el comando de movimiento:
+En esa misma terminal nueva (después del source), publica el comando (todo en una sola línea):
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 0.7, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}' --rate 10
+Si no se mueve, haz el undock primero (todo en una línea):
+ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
+Luego repite el pub. El robot debería avanzar en Gazebo.
+
+Cuál source usar?
+Comando: source ~/turtlebot4_ws/install/setup.bash
 # REPO2
 # REPARA EL ROS2 HUMBLE 
 sudo apt update
