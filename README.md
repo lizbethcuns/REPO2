@@ -49,6 +49,9 @@ ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=war
 
 # Deja la simulación en PLAY (▶️) y mueve la cámara para que se vea bien el robot.    PARA ROTAR SHIFT DERECHA MANTENER PRESIONADO + CON CLIC DERECHA MANTENER PRESIONADO
 
+# Primero lanzar SLAM 
+ros2 launch turtlebot4_navigation slam.launch.py
+
 # Ver el robot en RViz:
 ros2 launch turtlebot4_viz view_robot.launch.py
 
