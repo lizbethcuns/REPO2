@@ -92,6 +92,21 @@ ros2 topic pub /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 0.7, y: 0.0, z: 0.
 Si no se mueve, haz el undock primero (todo en una línea):
 ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
 Luego repite el pub. El robot debería avanzar en Gazebo.
+# ------------------------------------------------> CARPETA DE LOS SENSORES <-----------------------------------------------
+/opt/ros/humble/share/turtlebot4_description/urdf/sensors
+# ------------------------------------------------> ACTIVAR EL LIDAR <-----------------------------------------------
+# Edita el Archivo con Sudo
+sudo nano /opt/ros/humble/share/irobot_create_description/urdf/create3.urdf.xacro
+
+#Busca la línea ~301 (como en tu captura): <render_engine>ogre</render_engine>
+#Cámbiala a: <render_engine>ogre2</render_engine>
+#Guarda: Ctrl+O (escribe), Enter (confirma), Ctrl+X (salir).
+
+# Después del cambio, sourcea tu workspace:
+source ~/turtlebot4_ws/install/setup.bash
+# Rebuild si es necesario
+colcon build --packages-select irobot_create_description
+
 # ------------------------------------------------>ADICIONAL <-----------------------------------------------
 # Primero lanzar SLAM 
 ros2 launch turtlebot4_navigation slam.launch.py
