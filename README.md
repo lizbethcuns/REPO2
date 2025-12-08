@@ -154,15 +154,29 @@ ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=war
 
 #Prueba ahora mismo el clic izquierdo + arrastrar y verás que puedes girar 360° y ponerte justo enfrente del robot sin problema.
 # --------------------------------> finaliza <-------------------------
-#
-#
-#
-#
-#
-#
-#
-#
-#
+# ---------------------------------------------------------------> CUANDO CIERRO EL PROGRAMA  <-----------------------------------------------------------
+# Source el Workspace
+source ~/turtlebot4_ws/install/setup.bash
+# Lanza el Mapa/Simulación
+ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py model:=standard world:=warehouse
+
+# (Si quieres otro mapa, cambia world:=warehouse por depot o maze.)
+
+# Si ves errores (ej: sobre IGN_IP) agrega antes: 
+export IGN_IP=127.0.0.1. 
+
+# lista tópicos:
+ros2 topic list
+
+# Para mover
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 0.7, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}' --rate 10
+# --------------------------------> SOLUCION A PROBLEMAS <-------------------------
+# Si está docked, undock
+ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
+
+# Si sale error (ej: package not found), rebuild
+cd ~/turtlebot4_ws && colcon build --symlink-install && source install/setup.bash
+# --------------------------------><-------------------------
 #
 #
 #
