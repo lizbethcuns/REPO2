@@ -201,6 +201,8 @@ source install/setup.bash
 # Lanza el Mapa "Depot"
 source ~/turtlebot4_ws/install/setup.bash  # Si no lo tienes permanente
 ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=depot model:=standard  # O lite si usas ese
+# --------------------------------> AUN NO PROBADO <-------------------------
+
 #
 
 #
