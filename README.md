@@ -89,6 +89,8 @@ Deberías ver /cmd_vel y otros como en el ejemplo del repo.
 Envía el comando de movimiento:
 En esa misma terminal nueva (después del source), publica el comando (todo en una sola línea):
 ros2 topic pub /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 0.7, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}' --rate 10
+
+ros2 topic pub /cmd_vel geometry_msgs/Twist '{linear: {x: 0.7 , y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}'  ---------------------DEL GITHUB AYUDANTE
 Si no se mueve, haz el undock primero (todo en una línea):
 ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
 Luego repite el pub. El robot debería avanzar en Gazebo.
