@@ -121,6 +121,9 @@ ros2 launch turtlebot4_viz view_model.launch.py
 # Visualización del Grafo de Nodos con 
 rqt_graph
 
+# Para mover
+ros2 topic pub /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 0.7, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}' --rate 10
+
 # Visualizar el LiDAR
 #Haz clic en los tres puntitos ⋯ (arriba a la derecha)
 #Selecciona “Visualize Lidar”
@@ -131,6 +134,11 @@ rqt_graph
 # Si el robot se vuelve loco o se para (modo seguro), simplemente cierra todo y vuelve a lanzar el mundo con este comando (solución al problema de tus amigos):
 ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=warehouse lidar:=cpu 
 
+# ------------------- ENTENDER ros2 topic pub /cmd_vel geometry_msgs/msg/Twist '{linear: {x: 0.7, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.0}}' --rate 10 --------------------------------
+#x: 0.7 ------------- avanza hacia adelante a 0.7 metros por segundo (m/s)
+#y: 0.0 y z: 0.0 evitan movimiento lateral o vertical (el robot es 2D
+#(angular): Controla la rotación. Aquí todo es 0, así que no gira
+#--rate 10: Envía el comando 10 veces por segundo (10 Hz)
 # --------------->ADICIONALES<---------------------------
 #Formas de girar/mover la cámara en Gazebo (elige la que más te guste):
 
@@ -177,13 +185,24 @@ ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
 # Si sale error (ej: package not found), rebuild
 cd ~/turtlebot4_ws && colcon build --symlink-install && source install/setup.bash
 # --------------------------------><-------------------------
+# No me cargaba el mapa de depot
+
+# NO SE ME CARGO EL MAPA DEPOT 
+# Configura Variables de Entorno ------------------------ Ejecuta estos comandos antes de lanzar la simulación---------
+export IGN_IP=127.0.0.1  # Evita el loop de "Requesting list of world names"
+export LIBGL_ALWAYS_SOFTWARE=true  # Usa renderizado por CPU si no tienes GPU fuerte, evita blank
+# Verifica Instalaciones
+sudo apt update
+sudo apt install ignition-fortress ros-humble-ros-gz ros-humble-ros-gz-bridge ros-humble-ros-gz-sim ros-humble-turtlebot4-simulator ros-humble-irobot-create-msgs
+# Luego, rebuild tu workspace:
+cd ~/turtlebot4_ws
+colcon build --symlink-install
+source install/setup.bash
+# Lanza el Mapa "Depot"
+source ~/turtlebot4_ws/install/setup.bash  # Si no lo tienes permanente
+ros2 launch turtlebot4_ignition_bringup turtlebot4_ignition.launch.py world:=depot model:=standard  # O lite si usas ese
 #
-#
-#
-#
-#
-#
-#
+
 #
 #
 #
